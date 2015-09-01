@@ -1,0 +1,126 @@
+<ul id="markdown-toc">
+  <li><a href="#validation" id="markdown-toc-validation">Validation</a></li>
+  <li><a href="#self-closing-elements" id="markdown-toc-self-closing-elements">Self-closing Elements</a></li>
+  <li><a href="#attributes-and-tags" id="markdown-toc-attributes-and-tags">Attributes and Tags</a></li>
+  <li><a href="#quotes" id="markdown-toc-quotes">Quotes</a></li>
+  <li><a href="#indentation" id="markdown-toc-indentation">Indentation</a></li>
+  <li><a href="#body-class" id="markdown-toc-body-class">Body Class</a></li>
+  <li><a href="#file-naming" id="markdown-toc-file-naming">File Naming</a></li>
+</ul>
+
+<h2 id="validation">Validation</h2>
+<p>All HTML pages should be verified against the <a href="http://validator.w3.org/">W3C validator</a> to ensure that the markup is well formed. This in and of itself is not directly indicative of good code, but it helps to weed out problems that are able to be tested via automation.</p>
+
+<h2 id="self-closing-elements">Self-closing Elements</h2>
+<p>Most tags should be properly closed. These include:</p>
+
+<p><code>
+html, head, body, p, dt, dd, li, option, thead, th, tbody, tr, td, tfoot, colgroup
+</code></p>
+
+<p>These tags do not need to be closed:</p>
+
+<p><code>
+img, input, br, hr, meta
+</code></p>
+
+<p>Source: <a href="http://blog.teamtreehouse.com/to-close-or-not-to-close-tags-in-html5">http://blog.teamtreehouse.com/to-close-or-not-to-close-tags-in-html5</a></p>
+
+<h2 id="attributes-and-tags">Attributes and Tags</h2>
+<p>All tags and attributes must be written in lowercase:</p>
+
+<p><code>html
+&lt;a href="http://example.com/" data-color="blue" title="Description Here"&gt;Example.com&lt;/a&gt;
+</code></p>
+
+<h2 id="quotes">Quotes</h2>
+<p>According to the <a href="http://www.w3.org/TR/xhtml1/#h-4.4">W3C specifications</a> for HTML, all attributes must have a value, and must use double- or single-quotes. The following are examples of proper and improper usage of quotes and attribute/value pairs.</p>
+
+<p>Right:</p>
+
+<p><code>html
+&lt;input type="text" name="email" disabled="disabled" /&gt;
+&lt;input type='text' name='email' disabled='disabled' /&gt;
+</code></p>
+
+<p>Wrong:</p>
+
+<p><code>html
+&lt;input type=text name=email disabled&gt;
+</code>
+Source: <a href="https://make.wordpress.org/core/handbook/coding-standards/html/#quotes">https://make.wordpress.org/core/handbook/coding-standards/html/#quotes</a></p>
+
+<h2 id="indentation">Indentation</h2>
+<p>HTML indentation should always reflect logical structure. Use tabs and not spaces.</p>
+
+<p>Right:</p>
+
+<p><code>html
+&lt;?php if ( ! have_posts() ) : ?&gt;
+    &lt;div id="post-1" class="post"&gt;
+        &lt;h1 class="entry-title"&gt;Not Found&lt;/h1&gt;
+        &lt;div class="entry-content"&gt;
+            &lt;p&gt;Apologies, but no results were found.&lt;/p&gt;
+            &lt;?php get_search_form(); ?&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;?php endif; ?&gt;
+</code>
+Source: <a href="https://make.wordpress.org/core/handbook/coding-standards/html/#indentation">https://make.wordpress.org/core/handbook/coding-standards/html/#indentation</a></p>
+
+<h2 id="body-class">Body Class</h2>
+<p>Always use a body class to describe the contents of a page.</p>
+
+<p>```html</p>
+<body class="home">
+</body>
+
+<body class="blog">
+</body>
+
+<body class="page-about page-id-1">
+</body>
+
+<body class="page-work page-id-2">
+</body>
+
+<p>```
+These descriptive classes allow CSS rules to be scoped to specific pages without crowding the global namespace. For example, the above HTML would allow for the following CSS:</p>
+
+<p><code>scss
+// Cool box module defined in modules.scss
+.cool-box {
+  width: 200px;
+  height: 200px;
+  background: red;
+}
+// Page-specific override defined in pages.scss
+.page-about {
+  .cool-box {
+    background: blue;
+  }
+}
+</code></p>
+
+<p>This approach encourages DRY code and is also very semantic. A new developer could easily understand what is happening – even without any comments.</p>
+
+<h2 id="file-naming">File Naming</h2>
+<p>Image file names should be prefixed with their usage.</p>
+
+<p>Right:</p>
+
+<p><code>
+icon-home.png
+bg-container.jpg
+bg-home.jpg
+sprite-top-navigation.png
+</code></p>
+
+<p>Wrong:</p>
+
+<p><code>
+home-icon.png
+container-background.jpg
+bg.jpg
+top-navigation.png
+</code></p>

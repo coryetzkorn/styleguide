@@ -1,0 +1,126 @@
+<ul id="markdown-toc">
+  <li><a href="#jquery" id="markdown-toc-jquery">jQuery</a>    <ul>
+      <li><a href="#dom-ready" id="markdown-toc-dom-ready">DOM Ready</a></li>
+    </ul>
+  </li>
+  <li><a href="#global-variables" id="markdown-toc-global-variables">Global Variables</a>    <ul>
+      <li><a href="#breakpoints" id="markdown-toc-breakpoints">Breakpoints</a></li>
+    </ul>
+  </li>
+  <li><a href="#approved-plugins--libraries" id="markdown-toc-approved-plugins--libraries">Approved Plugins &amp; Libraries</a>    <ul>
+      <li><a href="#jquery-1" id="markdown-toc-jquery-1">jQuery</a></li>
+      <li><a href="#underscore" id="markdown-toc-underscore">Underscore</a></li>
+      <li><a href="#cycle-2" id="markdown-toc-cycle-2">Cycle 2</a></li>
+      <li><a href="#throttle--debounce" id="markdown-toc-throttle--debounce">Throttle / Debounce</a></li>
+      <li><a href="#masonry" id="markdown-toc-masonry">Masonry</a></li>
+      <li><a href="#matchheight" id="markdown-toc-matchheight">MatchHeight</a></li>
+      <li><a href="#modernizr" id="markdown-toc-modernizr">Modernizr</a></li>
+    </ul>
+  </li>
+  <li><a href="#utility-functions" id="markdown-toc-utility-functions">Utility Functions</a>    <ul>
+      <li><a href="#getrandomint" id="markdown-toc-getrandomint">getRandomInt()</a></li>
+      <li><a href="#getrandomfromarray" id="markdown-toc-getrandomfromarray">getRandomFromArray()</a></li>
+      <li><a href="#shuffle" id="markdown-toc-shuffle">shuffle()</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="jquery">jQuery</h2>
+
+<h3 id="dom-ready">DOM Ready</h3>
+
+<p>```javascript
+$(function(){</p>
+
+<p>});
+```</p>
+
+<h2 id="global-variables">Global Variables</h2>
+
+<h3 id="breakpoints">Breakpoints</h3>
+<p>Breakpoints should be saved as an object in the global scope.</p>
+
+<p><code>javascript
+var bp = {
+  xl: 1600,
+  l: 1200,
+  m: 880,
+  s: 700,
+  xs: 420
+};
+</code></p>
+
+<p>This approach makes it easy to target certain breakpoints. For example:</p>
+
+<p><code>javascript
+if( $(window).width() &lt; bp.m ) {
+  alert('This is a small screen');
+}
+</code></p>
+
+<h2 id="approved-plugins--libraries">Approved Plugins &amp; Libraries</h2>
+
+<h3 id="jquery-1">jQuery</h3>
+<p><a href="http://jquery.com/">http://jquery.com/</a><br />
+The original workhorse. Use it, but be sure to let google <a href="https://developers.google.com/speed/libraries/devguide">host it for you</a> to take advantage of their CDN.</p>
+
+<h3 id="underscore">Underscore</h3>
+<p><a href="http://underscorejs.org/">http://underscorejs.org/</a><br />
+Excellent choice for data-heavy projects that require a lot of object and array manipulation. Plays nice with jQuery.</p>
+
+<h3 id="cycle-2">Cycle 2</h3>
+<p><a href="http://jquery.malsup.com/cycle2/">http://jquery.malsup.com/cycle2/</a><br />
+The best and most versatile slideshow plugin. Simple, powerful, and responsive out-of-the-box.</p>
+
+<h3 id="throttle--debounce">Throttle / Debounce</h3>
+<p><a href="http://benalman.com/projects/jquery-throttle-debounce-plugin/">http://benalman.com/projects/jquery-throttle-debounce-plugin/</a><br />
+Rate-limit your functions in multiple useful ways. Great for limiting calls to functions triggered by resize or scroll events.</p>
+
+<h3 id="masonry">Masonry</h3>
+<p><a href="http://masonry.desandro.com/">http://masonry.desandro.com/</a><br />
+A grid layout library. Be careful! Always try a CSS solution before resorting to this plugin. This should be a last resort.</p>
+
+<h3 id="matchheight">MatchHeight</h3>
+<p><a href="http://brm.io/jquery-match-height/">http://brm.io/jquery-match-height/</a><br />
+Matches the height of all selected elements. Fully responsive. Great for vertically centering variable text in grid layouts.</p>
+
+<h3 id="modernizr">Modernizr</h3>
+<p><a href="http://modernizr.com/">http://modernizr.com/</a><br />
+Detects HTML5 and CSS3 features in the user’s browser. Avoid using this unless a site relies heavily on newer browser features.</p>
+
+<h2 id="utility-functions">Utility Functions</h2>
+
+<h3 id="getrandomint">getRandomInt()</h3>
+
+<p><code>javascript
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+</code></p>
+
+<h3 id="getrandomfromarray">getRandomFromArray()</h3>
+
+<p><code>javascript
+function getRandomFromArray(array) {
+  return array[Math.floor(Math.random()*array.length)];
+}
+</code></p>
+
+<h3 id="shuffle">shuffle()</h3>
+
+<p><code>javascript
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex ;
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  return array;
+}
+</code></p>

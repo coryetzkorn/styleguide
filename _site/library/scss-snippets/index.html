@@ -1,0 +1,199 @@
+<ul id="markdown-toc">
+  <li><a href="#mixins" id="markdown-toc-mixins">Mixins</a>    <ul>
+      <li><a href="#breakpoints-media-query" id="markdown-toc-breakpoints-media-query">Breakpoints Media Query</a></li>
+      <li><a href="#color-mapping" id="markdown-toc-color-mapping">Color Mapping</a></li>
+      <li><a href="#css3-vendor-prefix-mixins" id="markdown-toc-css3-vendor-prefix-mixins">CSS3 Vendor Prefix Mixins</a>        <ul>
+          <li><a href="#transition" id="markdown-toc-transition">Transition</a></li>
+          <li><a href="#transform" id="markdown-toc-transform">Transform</a></li>
+          <li><a href="#keyframes" id="markdown-toc-keyframes">Keyframes</a></li>
+          <li><a href="#animation" id="markdown-toc-animation">Animation</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#extendable-utility-classes" id="markdown-toc-extendable-utility-classes">Extendable Utility Classes</a>    <ul>
+      <li><a href="#no-select" id="markdown-toc-no-select">No Select</a></li>
+      <li><a href="#clear" id="markdown-toc-clear">Clear</a></li>
+    </ul>
+  </li>
+  <li><a href="#other-useful-bits" id="markdown-toc-other-useful-bits">Other Useful Bits</a>    <ul>
+      <li><a href="#selection-colors" id="markdown-toc-selection-colors">Selection Colors</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="mixins">Mixins</h2>
+
+<h3 id="breakpoints-media-query">Breakpoints Media Query</h3>
+
+<p>All breakpoints should be defined using a sass map and retrieved using the breakpoint mixin.</p>
+
+<p><code>scss
+$breakpoints: (
+  xl: (min-width: 1600px),
+  l: (max-width: 1200px),
+  m: (max-width: 880px),
+  s: (max-width: 700px),
+  xs: (max-width: 420px)
+);
+@mixin bp($name) {
+  $value: map-get($breakpoints, $name);
+  @if map-has-key($breakpoints, $name) {
+    @media #{inspect(map-get($breakpoints, $name))} {
+      @content;
+    }
+  }
+  @else {
+    @warn "The '#{$name}' breakpoint is not defined. "
+        + "Please make sure it is defined in the global.scss '$breakpoint' map.";
+  }
+}
+</code></p>
+
+<p>Source: <a href="http://www.christopherkollars.com/2014/12/05/sass-map-and-my-breakpoints.html/">http://www.christopherkollars.com/2014/12/05/sass-map-and-my-breakpoints.html/</a></p>
+
+<h3 id="color-mapping">Color Mapping</h3>
+
+<p>This mixin retrieves colors from a color map.</p>
+
+<p>```scss
+/* Sample color map */
+$colors: (
+  primary: rgb(50, 50, 50),
+  secondary: rgb(50, 50, 50),
+  tertiary: rgb(50, 50, 50),
+  accent: rgb(50, 50, 50),
+  inactive: rgb(50, 50, 50),
+  link: rgb(50, 50, 50),
+  hover: rgb(50, 50, 50),
+  active: rgb(50, 50, 50),
+  focus: rgb(50, 50, 50)
+);</p>
+
+<p>/* Color retrieval mixin */
+@function color($key) {
+  @if map-has-key($colors, $key) {
+    @return map-get($colors, $key);
+  }</p>
+
+<p>@warn “Unknown <code>#{$key}</code> in $colors.”;
+  @return null;
+}</p>
+
+<p>/* Mixin usage */
+.element {
+  background-color: color(primary); // rgb(50, 50, 50)
+}
+```</p>
+
+<p>Source: <a href="http://www.sitepoint.com/using-sass-maps/">http://www.sitepoint.com/using-sass-maps/</a></p>
+
+<h3 id="css3-vendor-prefix-mixins">CSS3 Vendor Prefix Mixins</h3>
+<p>For projects that don’t use <a href="https://github.com/postcss/autoprefixer">autoprefixer</a> or a <a href="http://gulpjs.com/">build process</a>, use these mixins to ensure all CSS3 animations are properly prefixed.</p>
+
+<h4 id="transition">Transition</h4>
+
+<p><code>scss
+@mixin transition($transition) {
+  -moz-transition: unquote($transition);
+  -o-transition: unquote($transition);
+  -webkit-transition: unquote($transition);
+  transition: unquote($transition);
+}
+</code></p>
+
+<h4 id="transform">Transform</h4>
+
+<p><code>scss
+@mixin transform($transforms) {
+  -moz-transform: unquote($transforms);
+  -o-transform: unquote($transforms);
+  -ms-transform: unquote($transforms);
+  -webkit-transform: unquote($transforms);
+  transform: unquote($transforms);
+}
+</code></p>
+
+<h4 id="keyframes">Keyframes</h4>
+
+<p><code>scss
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes $animation-name {
+    @content;
+  }
+  @-moz-keyframes $animation-name {
+    @content;
+  }  
+  @-ms-keyframes $animation-name {
+    @content;
+  }
+  @-o-keyframes $animation-name {
+    @content;
+  }  
+  @keyframes $animation-name {
+    @content;
+  }
+}
+</code></p>
+
+<h4 id="animation">Animation</h4>
+
+<p><code>scss
+@mixin animation($str) {
+  -webkit-animation: unquote($str};
+  -moz-animation: unquote($str};
+  -ms-animation: unquote($str};
+  -o-animation: unquote($str};
+  animation: unquote($str};     
+}
+</code></p>
+
+<h2 id="extendable-utility-classes">Extendable Utility Classes</h2>
+<p>These <a href="http://thesassway.com/intermediate/understanding-placeholder-selectors">placeholder selectors</a> can be extended using SASS’s <code>@extend</code> method.</p>
+
+<h3 id="no-select">No Select</h3>
+<p>Sometimes it’s nice disable selection on an element. I usually use this for buttons and other UI elements. I find it helps create a more native feel.</p>
+
+<p><code>scss
+%noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+</code>
+Source: <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/user-select?redirectlocale=en-US&amp;redirectslug=CSS/user-select">https://developer.mozilla.org/en-US/docs/Web/CSS/user-select?redirectlocale=en-US&amp;redirectslug=CSS/user-select</a></p>
+
+<h3 id="clear">Clear</h3>
+
+<p><code>scss
+%clear {
+  &amp;:before,
+  &amp;:after {
+    content: "";
+    display: table;
+  }
+  &amp;:after {
+    clear: both;
+  }
+}
+</code>
+Source: <a href="http://nicolasgallagher.com/micro-clearfix-hack/">http://nicolasgallagher.com/micro-clearfix-hack/</a></p>
+
+<h2 id="other-useful-bits">Other Useful Bits</h2>
+
+<h3 id="selection-colors">Selection Colors</h3>
+<p>Every site should have customized text selection colors.</p>
+
+<p><code>scss
+::selection {
+  background: rgb(50, 50, 50);
+  color: rgb(255, 255, 255);
+}
+::-moz-selection {
+  background: rgb(50, 50, 50);
+  color: rgb(255, 255, 255);
+}
+</code></p>

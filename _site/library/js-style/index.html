@@ -1,0 +1,297 @@
+<ul id="markdown-toc">
+  <li><a href="#spacing" id="markdown-toc-spacing">Spacing</a>    <ul>
+      <li><a href="#objects" id="markdown-toc-objects">Objects</a></li>
+      <li><a href="#arrays-and-function-calls" id="markdown-toc-arrays-and-function-calls">Arrays and Function Calls</a></li>
+    </ul>
+  </li>
+  <li><a href="#semicolons" id="markdown-toc-semicolons">Semicolons</a></li>
+  <li><a href="#indentation-and-line-breaks" id="markdown-toc-indentation-and-line-breaks">Indentation and Line Breaks</a>    <ul>
+      <li><a href="#blocks-and-curly-braces" id="markdown-toc-blocks-and-curly-braces">Blocks and Curly Braces</a></li>
+    </ul>
+  </li>
+  <li><a href="#assignments-and-globals" id="markdown-toc-assignments-and-globals">Assignments and Globals</a>    <ul>
+      <li><a href="#declaring-variables" id="markdown-toc-declaring-variables">Declaring Variables</a></li>
+    </ul>
+  </li>
+  <li><a href="#naming-conventions" id="markdown-toc-naming-conventions">Naming Conventions</a></li>
+  <li><a href="#comments" id="markdown-toc-comments">Comments</a></li>
+  <li><a href="#equality" id="markdown-toc-equality">Equality</a></li>
+  <li><a href="#type-checks" id="markdown-toc-type-checks">Type Checks</a></li>
+  <li><a href="#strings" id="markdown-toc-strings">Strings</a></li>
+  <li><a href="#best-practices" id="markdown-toc-best-practices">Best Practices</a>    <ul>
+      <li><a href="#arrays" id="markdown-toc-arrays">Arrays</a></li>
+      <li><a href="#objects-1" id="markdown-toc-objects-1">Objects</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="spacing">Spacing</h2>
+<p>Spaces are good!</p>
+
+<p>These rules encourage liberal spacing for improved readability. The minification process creates a file that is optimized for browsers to read and process.</p>
+
+<ul>
+  <li>Indentation with tabs.</li>
+  <li>No whitespace at the end of line or on blank lines.</li>
+  <li>Lines should usually be no longer than 80 characters, and should not exceed 100 (counting tabs as 4 spaces). This is a “soft” rule, but long lines generally indicate unreadable or disorganized code.
+<code>if</code>/<code>else</code>/<code>for</code>/<code>while</code>/<code>try</code> blocks should always use braces, and always go on multiple lines.</li>
+  <li>Unary special-character operators (e.g., <code>++</code>, <code>--</code>) must not have space next to their operand.</li>
+  <li>Any <code>,</code> and <code>;</code> must not have preceding space.</li>
+  <li>Any <code>;</code> used as a statement terminator must be at the end of the line.</li>
+  <li>Any <code>:</code> after a property name in an object definition must not have preceding space.</li>
+  <li>The <code>?</code> and <code>:</code> in a ternary conditional must have space on both sides.</li>
+  <li>No filler spaces in empty constructs (e.g., <code>{}</code>, <code>[]</code>, <code>fn()</code>).</li>
+  <li>Any <code>!</code> negation operator should have a following space.</li>
+</ul>
+
+<p>Right:</p>
+
+<p>```javascript
+var i;</p>
+
+<p>if ( condition ) {
+  doSomething( ‘with a string’ );
+} else if ( otherCondition ) {
+  otherThing({
+      key: value,
+      otherKey: otherValue
+  });
+} else {
+  somethingElse( true );
+}</p>
+
+<p>while ( ! condition ) {
+  iterating++;
+}</p>
+
+<p>for ( i = 0; i &lt; 100; i++ ) {
+  object[ array[ i ] ] = someFn( i );
+  $( ‘.container’ ).val( array[ i ] );
+}</p>
+
+<p>try {
+  // Expressions
+} catch ( e ) {
+  // Expressions
+}
+```
+Source: <a href="https://make.wordpress.org/core/handbook/coding-standards/javascript/#spacing">https://make.wordpress.org/core/handbook/coding-standards/javascript/#spacing</a></p>
+
+<h3 id="objects">Objects</h3>
+<p>Object declarations can be made on a single line if they are short (remember the line length guidelines). When an object declaration is too long to fit on one line, there must be one property per line. Property names only need to be quoted if they are reserved words or contain special characters:</p>
+
+<p>Right:</p>
+
+<p>```javascript
+// Preferred
+var map = {
+  ready: 9,
+  when: 4,
+  ‘you are’: 15
+};</p>
+
+<p>// Acceptable for small objects
+var map = { ready: 9, when: 4, ‘you are’: 15 };</p>
+
+<p>// Bad
+var map = { ready: 9,
+  when: 4, ‘you are’: 15 };
+```</p>
+
+<p>Source: <a href="https://make.wordpress.org/core/handbook/coding-standards/javascript/#objects">https://make.wordpress.org/core/handbook/coding-standards/javascript/#objects</a></p>
+
+<h3 id="arrays-and-function-calls">Arrays and Function Calls</h3>
+<p>Include extra spaces around arguments, but not properties:</p>
+
+<p>Right:</p>
+
+<p>```javascript
+array = [ a, b ];</p>
+
+<p>foo( arg );</p>
+
+<p>foo( ‘string’, object );</p>
+
+<p>foo( options, object[property] );</p>
+
+<p>foo( node, ‘property’, 2 );
+```</p>
+
+<p>Inspired by: <a href="https://make.wordpress.org/core/handbook/coding-standards/javascript/#arrays-and-function-calls">https://make.wordpress.org/core/handbook/coding-standards/javascript/#arrays-and-function-calls</a></p>
+
+<h2 id="semicolons">Semicolons</h2>
+<p>Yes! Use them. Never rely on Automatic Semicolon Insertion (ASI).</p>
+
+<p>Source: <a href="https://make.wordpress.org/core/handbook/coding-standards/javascript/#semicolons">https://make.wordpress.org/core/handbook/coding-standards/javascript/#semicolons</a></p>
+
+<h2 id="indentation-and-line-breaks">Indentation and Line Breaks</h2>
+<p>Indentation and line breaks add readability to complex statements.</p>
+
+<p>Tabs should be used for indentation. Even if the entire file is contained in a closure (i.e., an immediately invoked function), the contents of that function should be indented by one tab:</p>
+
+<p>Right:</p>
+
+<p>```javascript
+(function( $ ) {
+    // Expressions indented</p>
+
+<pre><code>function doSomething() {
+    // Expressions indented
+} })( jQuery ); ```
+</code></pre>
+
+<p>Source: <a href="https://make.wordpress.org/core/handbook/coding-standards/javascript/#indentation-and-line-breaks">https://make.wordpress.org/core/handbook/coding-standards/javascript/#indentation-and-line-breaks</a></p>
+
+<h3 id="blocks-and-curly-braces">Blocks and Curly Braces</h3>
+<p><code>if</code>, <code>else</code>, <code>for</code>, <code>while</code>, and <code>try</code> blocks should always use braces, and always go on multiple lines. The opening brace should be on the same line as the function definition, the conditional, or the loop. The closing brace should be on the line directly following the last statement of the block.</p>
+
+<p>Right:</p>
+
+<p>```javascript
+var a, b, c;</p>
+
+<p>if ( myFunction() ) {
+    // Expressions
+} else if ( ( a &amp;&amp; b ) || c ) {
+    // Expressions
+} else {
+    // Expressions
+}
+```</p>
+
+<p>Source: <a href="https://make.wordpress.org/core/handbook/coding-standards/javascript/#blocks-and-curly-braces">https://make.wordpress.org/core/handbook/coding-standards/javascript/#blocks-and-curly-braces</a></p>
+
+<h2 id="assignments-and-globals">Assignments and Globals</h2>
+
+<h3 id="declaring-variables">Declaring Variables</h3>
+<p>Each function should begin with a single comma-delimited <code>var</code> statement that declares any local variables necessary. If a function does not declare a variable using <code>var</code>, that variable can leak into an outer scope (which is frequently the global scope, a worst-case scenario), and can unwittingly refer to and modify that data.</p>
+
+<p>Assignments within the <code>var</code> statement should be listed on individual lines, while declarations can be grouped on a single line. Any additional lines should be indented with an additional tab. Objects and functions that occupy more than a handful of lines should be assigned outside of the <code>var</code> statement, to avoid over-indentation.</p>
+
+<p>```javascript
+// Good
+var k, m, length,
+    // Indent subsequent lines by one tab
+    value = ‘lorem’;</p>
+
+<p>// Bad
+var foo = true;
+var bar = false;
+var a;
+var b;
+var c;
+```</p>
+
+<p>Source: <a href="https://make.wordpress.org/core/handbook/coding-standards/javascript/#declaring-variables">https://make.wordpress.org/core/handbook/coding-standards/javascript/#declaring-variables</a></p>
+
+<h2 id="naming-conventions">Naming Conventions</h2>
+<p>Variable and function names should be full words, using camel case with a lowercase first letter.</p>
+
+<p>Constructors intended for use with new should have a capital first letter (UpperCamelCase).</p>
+
+<p>Names should be descriptive, but not excessively so. Exceptions are allowed for iterators, such as the use of <code>i</code> to represent the index in a loop.</p>
+
+<p>Source: <a href="https://make.wordpress.org/core/handbook/coding-standards/javascript/#naming-conventions">https://make.wordpress.org/core/handbook/coding-standards/javascript/#naming-conventions</a></p>
+
+<h2 id="comments">Comments</h2>
+<p>Comments come before the code to which they refer, and should always be preceded by a blank line. Capitalize the first letter of the comment, and include a period at the end when writing full sentences. There must be a single space between the comment token (<code>//</code>) and the comment text.</p>
+
+<p>Single line comments:</p>
+
+<p>```javascript
+someStatement();</p>
+
+<p>// Explanation of something complex on the next line
+$( ‘p’ ).doSomething();
+```</p>
+
+<p>Multi-line comments should be used for long comments:</p>
+
+<p><code>javascript
+/*
+This is a comment that is long enough to warrant being stretched
+over the span of multiple lines.
+*/
+</code></p>
+
+<p>Source: <a href="https://make.wordpress.org/core/handbook/coding-standards/javascript/#comments">https://make.wordpress.org/core/handbook/coding-standards/javascript/#comments</a></p>
+
+<h2 id="equality">Equality</h2>
+<p>Strict equality checks (<code>===</code>) must be used in favor of abstract equality checks (<code>==</code>).</p>
+
+<h2 id="type-checks">Type Checks</h2>
+<p>These are the preferred ways of checking the type of an object:</p>
+
+<ul>
+  <li>String: <code>typeof object === 'string'</code></li>
+  <li>Number: <code>typeof object === 'number'</code></li>
+  <li>Boolean: <code>typeof object === 'boolean'</code></li>
+  <li>Object: <code>typeof object === 'object'</code> or <code>_.isObject( object )</code></li>
+  <li>Plain Object: <code>jQuery.isPlainObject( object )</code></li>
+  <li>Function: <code>_.isFunction( object )</code> or <code>jQuery.isFunction( object )</code></li>
+  <li>Array: <code>_.isArray( object )</code> or <code>jQuery.isArray( object )</code></li>
+  <li>Element: <code>object.nodeType</code> or <code>_.isElement( object )</code></li>
+  <li>null: <code>object === null</code></li>
+  <li>null or undefined: <code>object == null</code></li>
+  <li>undefined:
+    <ul>
+      <li>Global Variables: <code>typeof variable === 'undefined'</code></li>
+      <li>Local Variables: <code>variable === undefined</code></li>
+      <li>Properties: <code>object.prop === undefined</code></li>
+      <li>Any of the above: <code>_.isUndefined( object )</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p>Source: <a href="https://make.wordpress.org/core/handbook/coding-standards/javascript/#type-checks">https://make.wordpress.org/core/handbook/coding-standards/javascript/#type-checks</a></p>
+
+<h2 id="strings">Strings</h2>
+<p>Use single-quotes for string literals:</p>
+
+<p><code>javascript
+var myStr = 'strings should be contained in single quotes';
+</code></p>
+
+<p>When a string contains single quotes, they need to be escaped with a backslash (<code>\</code>):</p>
+
+<p><code>javascript
+// Escape single quotes within strings:
+'Note the backslash before the \'single quotes\'';
+</code></p>
+
+<p>Source: <a href="https://make.wordpress.org/core/handbook/coding-standards/javascript/#strings">https://make.wordpress.org/core/handbook/coding-standards/javascript/#strings</a></p>
+
+<h2 id="best-practices">Best Practices</h2>
+
+<h3 id="arrays">Arrays</h3>
+<p>Creating arrays in JavaScript should be done using the shorthand <code>[]</code> constructor rather than the <code>new Array()</code> notation.</p>
+
+<p><code>javascript
+var myArray = [];
+</code></p>
+
+<p>You can initialize an array during construction:</p>
+
+<p><code>javascript
+var myArray = [ 1, 'Lorem', 2, 'Ipsum' ];
+</code></p>
+
+<p>Source: <a href="https://make.wordpress.org/core/handbook/coding-standards/javascript/#arrays">https://make.wordpress.org/core/handbook/coding-standards/javascript/#arrays</a></p>
+
+<h3 id="objects-1">Objects</h3>
+<p>There are many ways to create objects in JavaScript. Object literal notation, {}, is both the most performant, and also the easiest to read.</p>
+
+<p><code>javascript
+var myObj = {};
+</code></p>
+
+<p>Object properties should be accessed via dot notation, unless the key is a variable, a reserved word, or a string that would not be a valid identifier:</p>
+
+<p><code>javascript
+prop = object.propertyName;
+prop = object[ variableKey ];
+prop = object['default'];
+prop = object['key-with-hyphens'];
+</code></p>
+
+<p>Source: <a href="https://make.wordpress.org/core/handbook/coding-standards/javascript/#objects">https://make.wordpress.org/core/handbook/coding-standards/javascript/#objects</a></p>

@@ -1,0 +1,481 @@
+<ul id="markdown-toc">
+  <li><a href="#naming-conventions" id="markdown-toc-naming-conventions">Naming Conventions</a>    <ul>
+      <li><a href="#classes-not-ids" id="markdown-toc-classes-not-ids">Classes, not IDs</a></li>
+      <li><a href="#dashes--bem" id="markdown-toc-dashes--bem">Dashes + BEM</a></li>
+      <li><a href="#functional-not-contextual" id="markdown-toc-functional-not-contextual">Functional, not contextual</a></li>
+      <li><a href="#colors" id="markdown-toc-colors">Colors</a></li>
+      <li><a href="#fonts" id="markdown-toc-fonts">Fonts</a></li>
+    </ul>
+  </li>
+  <li><a href="#syntax--spacing" id="markdown-toc-syntax--spacing">Syntax &amp; Spacing</a>    <ul>
+      <li><a href="#spacing" id="markdown-toc-spacing">Spacing</a></li>
+      <li><a href="#indentation--line-length" id="markdown-toc-indentation--line-length">Indentation &amp; Line Length</a></li>
+      <li><a href="#tabs-vs-spaces" id="markdown-toc-tabs-vs-spaces">Tabs vs Spaces</a></li>
+      <li><a href="#comments" id="markdown-toc-comments">Comments</a></li>
+      <li><a href="#quotes" id="markdown-toc-quotes">Quotes</a></li>
+    </ul>
+  </li>
+  <li><a href="#performance" id="markdown-toc-performance">Performance</a>    <ul>
+      <li><a href="#specificity" id="markdown-toc-specificity">Specificity</a></li>
+      <li><a href="#nesting" id="markdown-toc-nesting">Nesting</a></li>
+    </ul>
+  </li>
+  <li><a href="#componentizing" id="markdown-toc-componentizing">Componentizing</a></li>
+  <li><a href="#reset-vs-normalize" id="markdown-toc-reset-vs-normalize">Reset vs Normalize</a></li>
+  <li><a href="#architecture" id="markdown-toc-architecture">Architecture</a>    <ul>
+      <li><a href="#modules" id="markdown-toc-modules">Modules</a></li>
+      <li><a href="#file-division" id="markdown-toc-file-division">File division</a>        <ul>
+          <li><a href="#normalizescss" id="markdown-toc-normalizescss">normalize.scss</a></li>
+          <li><a href="#globalscss" id="markdown-toc-globalscss">global.scss</a></li>
+          <li><a href="#typographyscss" id="markdown-toc-typographyscss">typography.scss</a></li>
+          <li><a href="#layoutscss" id="markdown-toc-layoutscss">layout.scss</a></li>
+          <li><a href="#modulesscss" id="markdown-toc-modulesscss">modules.scss</a></li>
+          <li><a href="#pagesscss" id="markdown-toc-pagesscss">pages.scss</a></li>
+          <li><a href="#zindexscss" id="markdown-toc-zindexscss">zindex.scss</a></li>
+          <li><a href="#retinascss" id="markdown-toc-retinascss">retina.scss</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="naming-conventions">Naming Conventions</h2>
+
+<h3 id="classes-not-ids">Classes, not IDs</h3>
+<p>Never use IDs to style elements. They’re completely valid and semantic, but also add unnecessary specificity. These are the reasons I only use classes:</p>
+
+<ul>
+  <li>Classes create a level playing field when debugging CSS.</li>
+  <li>IDs create specificity battles.</li>
+  <li>Classes can be reused. It’s never safe to assume an element will be used only once.</li>
+</ul>
+
+<h3 id="dashes--bem">Dashes + BEM</h3>
+<p>Classes and IDs are lowercase with words separated by a dash:</p>
+
+<p>Right:</p>
+
+<p><code>scss
+.cool-box {}
+.amazing-wrapper {}
+.rad-button {}
+</code></p>
+
+<p>Wrong:</p>
+
+<p><code>scss
+.coolBox {}
+.amazingwrapper {}
+.rad_button {}
+</code></p>
+
+<p>Use BEM syntax to extend classes:</p>
+
+<p><code>scss
+.block {}
+.block__element {}
+.block--modifier {}
+</code></p>
+
+<ul>
+  <li><code>.block</code> represents the higher level of an abstraction or component</li>
+  <li><code>.block__element</code> represents a descendant of .block that helps form .block as a whole</li>
+  <li><code>.block--modifier</code> represents a different state or version of .block</li>
+</ul>
+
+<p>For more about BEM, read <a href="http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/">this great explanation</a> by Harry Roberts.</p>
+
+<p>Source: <a href="http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/">http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/</a>, <a href="https://bem.info">https://bem.info</a></p>
+
+<h3 id="functional-not-contextual">Functional, not contextual</h3>
+<p>Class names should never tie an element to a specific location or context.</p>
+
+<p>Right:</p>
+
+<p><code>scss
+.sidebar {}
+.sidebar--emphasis {}
+</code></p>
+
+<p>Wrong:</p>
+
+<p><code>scss
+.right-col {}
+.right-col--blue {}
+</code></p>
+
+<p>The first set of selectors is better because the names describe the <em>function</em> of the element they’re styling. The function of a sidebar is unlikely to change throughout the life of a project, but it’s position or color could change many times.</p>
+
+<h3 id="colors">Colors</h3>
+<p>Colors are stored as a SASS map. Always choose names wisely. Use generalized names like “primary” and “accent” instead of “green” or “blue”. If “blue” needs to be changed to red later in the project, using generic variable names will help avoid confusion.</p>
+
+<p><code>scss
+$colors: (
+  primary: rgb(50, 50, 50),
+  secondary: rgb(50, 50, 50),
+  tertiary: rgb(50, 50, 50),
+  accent: rgb(50, 50, 50),
+  inactive: rgb(50, 50, 50),
+  link: rgb(50, 50, 50),
+  hover: rgb(50, 50, 50),
+  active: rgb(50, 50, 50),
+  focus: rgb(50, 50, 50)
+);
+</code>
+Colors should be defined using RGB or RGBA syntax.</p>
+
+<p>Inspired by: <a href="http://davidwalsh.name/sass-color-variables-dont-suck">http://davidwalsh.name/sass-color-variables-dont-suck</a></p>
+
+<h3 id="fonts">Fonts</h3>
+<p>Use mixins to represent font families used throughout the site:</p>
+
+<p><code>scss
+@mixin sans() {
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 400;
+}
+@mixin sans-bold() {
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 700;
+}
+@mixin serif() {
+  font-family: "Georgia", serif;
+  font-weight: 700;
+}
+</code></p>
+
+<p>These mixins typically include anything related to the styling of the font such as:</p>
+
+<ul>
+  <li>letter-spacing</li>
+  <li>line-height</li>
+  <li>font-style</li>
+  <li>font-weight</li>
+  <li>text-decoration</li>
+  <li>text-transform</li>
+</ul>
+
+<p>Do not include font-size. Font sizes should be defined in a separate SASS map.</p>
+
+<p>Use generic names such as “sans” of “serif-bold”. Avoid naming the mixins “arial” or anything that will tie it to a specific font family.</p>
+
+<h2 id="syntax--spacing">Syntax &amp; Spacing</h2>
+
+<h3 id="spacing">Spacing</h3>
+<p>CSS rules should be comma separated but live on new lines:</p>
+
+<p>Right:</p>
+
+<p><code>scss
+.wrapper,
+.wrapper-wide {
+  …
+}
+</code></p>
+
+<p>Wrong:</p>
+
+<p><code>scss
+.wrapper, .wrapper-wide {
+  …
+}
+</code></p>
+
+<p>CSS blocks should be separated by a single new line. Not two. Not 0.</p>
+
+<p>Right:</p>
+
+<p><code>scss
+.wrapper {
+  …
+}
+.wrapper-wide {
+  …
+}
+</code></p>
+
+<p>Wrong:</p>
+
+<p>```scss
+.wrapper {
+  …
+}</p>
+
+<p>.wrapper-wide {
+  …
+}
+```</p>
+
+<p>Source: <a href="https://medium.com/@fat/mediums-css-is-actually-pretty-fucking-good-b8e2a6c78b06">https://medium.com/@fat/mediums-css-is-actually-pretty-fucking-good-b8e2a6c78b06</a></p>
+
+<h3 id="indentation--line-length">Indentation &amp; Line Length</h3>
+<p>Right:</p>
+
+<p><code>scss
+.lorem {
+  color: blue;
+  font-size: 2em;
+  line-height: 1;
+  text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+}
+</code></p>
+
+<p>Wrong:</p>
+
+<p><code>scss
+.lorem { color: blue; font-size: 2em; line-height: 1; text-decoration: none; font-weight: bold; letter-spacing: 0.02em; }
+</code></p>
+
+<h3 id="tabs-vs-spaces">Tabs vs Spaces</h3>
+<p>TWO SPACES! Use the tab key to indent, but set the code editor to insert two spaces for every tab.</p>
+
+<h3 id="comments">Comments</h3>
+<p>Use single-line comments whenever possible because SASS will compile them out.</p>
+
+<p>Right:</p>
+
+<p><code>scss
+// Header
+// --------------------------------
+</code>
+<code>
+// Cool Box
+</code></p>
+
+<p>Wrong:</p>
+
+<p><code>scss
+/* Header
+---------------------------------*/
+</code></p>
+
+<h3 id="quotes">Quotes</h3>
+<p>Quotes are optional in CSS and LESS. However, quotes make it visually clearer that the string is not a selector or a style property.</p>
+
+<p>Right:</p>
+
+<p><code>scss
+background-image: url("/img/you.jpg");
+font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial;
+</code></p>
+
+<p>Wrong:</p>
+
+<p><code>scss
+background-image: url(/img/you.jpg);
+font-family: Helvetica Neue Light, Helvetica Neue, Helvetica, Arial;
+</code></p>
+
+<h2 id="performance">Performance</h2>
+
+<h3 id="specificity">Specificity</h3>
+<p>Although in the name (cascading style sheets) cascading can introduce unnecessary performance overhead for applying styles. Take the following example:</p>
+
+<p><code>css
+ul.user-list li span a:hover { color: red; }
+</code></p>
+
+<p>Styles are resolved during the renderer’s layout pass. The selectors are resolved right to left, exiting when it has been detected the selector does not match. Therefore, in this example every a tag has to be inspected to see if it resides inside a span and a list. As you can imagine this requires a lot of DOM walking and and for large documents can cause a significant increase in the layout time.</p>
+
+<p>If we know we want to give all <code>a</code> elements inside the <code>.user-list</code> red on hover we can simplify this style to:</p>
+
+<p><code>css
+.user-list a:hover { color: red; }
+</code></p>
+
+<p>If we want to only style specific <code>a</code> elements inside <code>.user-list</code> we can give them a specific class:</p>
+
+<p><code>css
+.user-list .link-primary:hover { color: red; }
+</code>
+Source: <a href="https://medium.com/@fat/mediums-css-is-actually-pretty-fucking-good-b8e2a6c78b06">https://medium.com/@fat/mediums-css-is-actually-pretty-fucking-good-b8e2a6c78b06</a></p>
+
+<h3 id="nesting">Nesting</h3>
+<ul>
+  <li>Avoid nesting whenever possible.</li>
+  <li>Never go more than four levels deep.</li>
+  <li>Nested selectors should NOT match nesting of corresponding HTML elements 1-for-1.</li>
+</ul>
+
+<p>Right:</p>
+
+<p><code>scss
+.container {
+  ul {
+    color: red;
+  }
+  li {
+    padding: 0;
+  }
+  a {
+    color: blue;
+  }
+}
+</code></p>
+
+<p>Wrong:</p>
+
+<p><code>scss
+.container {
+  ul {
+    color: red;
+    li {
+      padding: 0;
+      a {
+        color: blue;
+      }
+    }
+  }
+}
+</code></p>
+
+<p>Source: <a href="http://thesassway.com/beginner/the-inception-rule">http://thesassway.com/beginner/the-inception-rule</a></p>
+
+<h2 id="componentizing">Componentizing</h2>
+<p>A name like <code>.homepage-nav</code> limits its use. Instead think about writing styles in such a way that they can be reused in other parts of the app. Instead of .homepage-nav, try instead <code>.nav</code> or <code>.nav-bar</code>. Ask yourself if this component could be reused in another context (chances are it could!).</p>
+
+<p>Here are some sample modules and their corresponding CSS:</p>
+
+<p>```html
+<!-- This is a cool box module --></p>
+<div class="superbox">
+  <div class="superbox__label">This is the label</div>
+  <div class="superbox__content">
+    <p>This is the content</p>
+  </div>
+</div>
+
+<!-- This is a cool box module, extended with the "grow" class -->
+<div class="superbox superbox--grow">
+  <div class="superbox__label">This is the label</div>
+  <div class="superbox__content">
+    <p>This is the content</p>
+  </div>
+</div>
+
+<!-- This is a cool text area module -->
+<div class="cool-text">
+  <p>Super awesome text!</p>
+  <ul>
+    <li>List item</li>
+    <li>List item</li>
+    <li>List item</li>
+  </ul>
+</div>
+<p>```</p>
+
+<p>```scss
+.superbox {
+  height: 100px;
+  width: 100px;
+  background: red;
+  &amp;__label {
+    color: white;
+  }
+  &amp;__content {
+    color: blue;
+  }
+  &amp;–grow {
+    width: 200px;
+  }
+}</p>
+
+<p>.cool-text {
+  color: black;
+  p {
+    margin: 1em 0;
+  }
+  li {
+    list-style: none;
+  }
+}
+```</p>
+
+<h2 id="reset-vs-normalize">Reset vs Normalize</h2>
+<p>Every project should include either a reset or normalize stylesheet.<br />
+<a href="http://meyerweb.com/eric/tools/css/reset/">Eric Meyer’s reset</a><br />
+<a href="http://necolas.github.io/normalize.css/">Nicolas Gallagher’s normalize</a></p>
+
+<p>Unless these is a compelling reason to reset all default styles (maybe if you’re building an HTML5 game), use normalize. This <a href="http://stackoverflow.com/questions/6887336/what-is-the-difference-between-normalize-css-and-reset-css">Stack Overflow answer</a> outlines the reasons why normalize is usually more appropriate:</p>
+
+<ul>
+  <li>Normalize.css preserves useful defaults rather than “unstyling” everything.</li>
+  <li>Normalize.css corrects some common bugs that are out of scope for reset.css.</li>
+  <li>Normalize.css doesn’t clutter dev tools.</li>
+</ul>
+
+<h2 id="architecture">Architecture</h2>
+
+<h3 id="modules">Modules</h3>
+<p>Styles should always be grouped into reusable, modular chunks.
+Never organize styles alphabetically by name. It makes sense in theory, but is horribly confusing in practice.</p>
+
+<h3 id="file-division">File division</h3>
+<p>I typically start projects with seven stylesheets (compiled in this specific order). I’ve found this division works nicely:</p>
+
+<ul>
+  <li>normalize.scss</li>
+  <li>global.scss</li>
+  <li>typography.scss</li>
+  <li>layout.scss</li>
+  <li>modules.scss</li>
+  <li>pages.scss</li>
+  <li>zindex.scss</li>
+  <li>retina.scss</li>
+</ul>
+
+<p>Here’s what each file is for:</p>
+
+<h4 id="normalizescss">normalize.scss</h4>
+
+<ul>
+  <li><a href="http://necolas.github.io/normalize.css/">Nicolas Gallagher’s normalize</a></li>
+</ul>
+
+<h4 id="globalscss">global.scss</h4>
+<ul>
+  <li>Global variables. Colors etc.</li>
+  <li>Global mixins.</li>
+  <li>Utility classes such as clearfix, noselect, etc. I define these as extendable classes instead of mixins.</li>
+  <li>Box model mode (usually set to border-box gloablly).</li>
+</ul>
+
+<h4 id="typographyscss">typography.scss</h4>
+<ul>
+  <li>Type sizes defined as variables.</li>
+  <li>Font mixins.</li>
+</ul>
+
+<h4 id="layoutscss">layout.scss</h4>
+<ul>
+  <li>Responsive grid system.</li>
+  <li>Container classes.</li>
+  <li>Layout-related helper classes (such as add-margin or pad-all).</li>
+</ul>
+
+<h4 id="modulesscss">modules.scss</h4>
+<ul>
+  <li>Any code that is used more than once throughout the site that can be abstracted into a reusable modules.</li>
+  <li>Header styles (the header counts as a module).</li>
+  <li>Footer styles.</li>
+</ul>
+
+<h4 id="pagesscss">pages.scss</h4>
+<ul>
+  <li>Any unique code that only applies to certain pages that cannot be abstracted to a module.</li>
+  <li>Styles scoped only to a specific page. For example, styles that are only used on the “about” page.</li>
+  <li>Page-specific module overrides. For example, the <code>.cool-box</code> module might create a blue box by default (as defined in modules.scss). To make it red on a specific page, you could override the default using <code>.page-id-123 .cool-box</code>.</li>
+</ul>
+
+<h4 id="zindexscss">zindex.scss</h4>
+<ul>
+  <li>All z-indeces should be defined in this single file.
+Here’s a nice example: <a href="https://gist.github.com/fat/1f6da6b3bd0311a1f8a0">https://gist.github.com/fat/1f6da6b3bd0311a1f8a0</a></li>
+</ul>
+
+<h4 id="retinascss">retina.scss</h4>
+<ul>
+  <li>Media query to replace background images for hi-dpi screens.</li>
+</ul>

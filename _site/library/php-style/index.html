@@ -1,0 +1,129 @@
+<ul id="markdown-toc">
+  <li><a href="#quotes" id="markdown-toc-quotes">Quotes</a></li>
+  <li><a href="#indentation" id="markdown-toc-indentation">Indentation</a></li>
+  <li><a href="#brace-style" id="markdown-toc-brace-style">Brace Style</a></li>
+  <li><a href="#shorthand-php-tags" id="markdown-toc-shorthand-php-tags">Shorthand PHP Tags</a></li>
+  <li><a href="#spaces" id="markdown-toc-spaces">Spaces</a></li>
+  <li><a href="#naming-conventions" id="markdown-toc-naming-conventions">Naming Conventions</a></li>
+</ul>
+
+<h2 id="quotes">Quotes</h2>
+<p>Use single and double quotes when appropriate. If you’re not evaluating anything in the string, use single quotes. You should almost never have to escape quotes in a string, because you can just alternate your quoting style, like so:</p>
+
+<p><code>php
+echo '&lt;a href="/static/link" title="Yeah yeah!"&gt;Link name&lt;/a&gt;';
+echo "&lt;a href='$link' title='$linktitle'&gt;$linkname&lt;/a&gt;";
+</code>
+Source: <a href="https://make.wordpress.org/core/handbook/coding-standards/php/#single-and-double-quotes">https://make.wordpress.org/core/handbook/coding-standards/php/#single-and-double-quotes</a></p>
+
+<h2 id="indentation">Indentation</h2>
+<p>Indentation should always reflect logical structure. Use real tabs and not spaces, as this allows the most flexibility across clients.</p>
+
+<h2 id="brace-style">Brace Style</h2>
+<p>Braces should be used for all blocks in the style shown here:</p>
+
+<p><code>php
+if ( condition ) {
+    action1();
+    action2();
+} elseif ( condition2 &amp;&amp; condition3 ) {
+    action3();
+    action4();
+} else {
+    defaultaction();
+}
+</code></p>
+
+<h2 id="shorthand-php-tags">Shorthand PHP Tags</h2>
+<p>Never use shorthand PHP start tags. Always use full PHP tags.</p>
+
+<p>Right:</p>
+
+<p><code>php
+&lt;?php ... ?&gt;
+&lt;?php echo $var; ?&gt;
+</code></p>
+
+<p>Wrong:</p>
+
+<p><code>php
+&lt;? ... ?&gt;
+&lt;?= $var ?&gt;
+</code></p>
+
+<h2 id="spaces">Spaces</h2>
+<p>Always put spaces after commas, and on both sides of logical, comparison, string and assignment operators.</p>
+
+<p><code>php
+x == 23
+foo &amp;&amp; bar
+! foo
+array( 1, 2, 3 )
+$baz . '-5'
+$term .= 'X'
+</code></p>
+
+<p>Put spaces on both sides of the opening and closing parenthesis of <code>if</code>, <code>elseif</code>, <code>foreach</code>, <code>for</code>, and <code>switch</code> blocks.</p>
+
+<p><code>php
+foreach ( $foo as $bar ) { ...
+</code></p>
+
+<p>When defining a function, do it like so:</p>
+
+<p><code>php
+function my_function( $param1 = 'foo', $param2 = 'bar' ) { ...
+</code></p>
+
+<p>When calling a function, do it like so:</p>
+
+<p><code>php
+my_function( $param1, func_param( $param2 ) );
+</code></p>
+
+<p>When performing logical comparisons, do it like so:</p>
+
+<p><code>php
+if ( ! $foo ) { ...
+</code></p>
+
+<p>When referring to array items, only include a space around the index if it is a variable, for example:</p>
+
+<p>```php
+$x = $foo[‘bar’]; // correct
+$x = $foo[ ‘bar’ ]; // incorrect</p>
+
+<p>$x = $foo[0]; // correct
+$x = $foo[ 0 ]; // incorrect</p>
+
+<p>$x = $foo[ $bar ]; // correct
+$x = $foo[$bar]; // incorrect
+```</p>
+
+<p>Source: <a href="https://make.wordpress.org/core/handbook/coding-standards/php/#space-usage">https://make.wordpress.org/core/handbook/coding-standards/php/#space-usage</a></p>
+
+<h2 id="naming-conventions">Naming Conventions</h2>
+<p>Use lowercase letters in variable, action, and function names (never <code>camelCase</code>). Separate words via underscores. Don’t abbreviate variable names un-necessarily; let the code be unambiguous and self-documenting.</p>
+
+<p><code>php
+function some_name( $some_variable ) { [...] }
+</code></p>
+
+<p>Class names should use capitalized words separated by underscores. Any acronyms should be all upper case.</p>
+
+<p><code>php
+class Walker_Category extends Walker { [...] }
+class WP_HTTP { [...] }
+</code></p>
+
+<p>Constants should be in all upper-case with underscores separating words:</p>
+
+<p><code>php
+define( 'DOING_AJAX', true );
+</code></p>
+
+<p>Files should be named descriptively using lowercase letters. Hyphens should separate words.</p>
+
+<p><code>php
+my-file-name.php
+</code></p>
